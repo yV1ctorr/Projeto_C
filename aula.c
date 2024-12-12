@@ -12,77 +12,114 @@ typedef struct {
 
 }Remedio;
 
+
+int indice = 0;
+int *PtrIndex = &indice;
+Remedio remedios[10];
+Remedio *PtrRemedio = remedios;
+
+
 // Função para cadastrar um novo remedio
-void cadastrarProduto(Remedio *r) {
+void cadastrarProduto(Remedio *PtrRemedio, int *PtrIndex) {
     
     printf("\nDigite um ID para o remedio: ");
-    scanf("%d", &r->id);
+    scanf("%d", &PtrRemedio[*PtrIndex].id);
     fflush(stdin);
     
     printf("Digite o nome do remedio: ");
-    scanf(" %[^\n]", &r->nome);
+    scanf(" %[^\n]", PtrRemedio[*PtrIndex].nome);
     fflush(stdin);
     
-    printf("Digite a descrição do remedio: ");
-    scanf(" %[^\n]", &r->descricao);
+    printf("Digite a descricao do remedio: ");
+    scanf(" %[^\n]", PtrRemedio[*PtrIndex].descricao);
     fflush(stdin);
     
     printf("Digite a quantidade do remdio: ");
-    scanf("%d", &r->quantidade);
+    scanf("%d", &PtrRemedio[*PtrIndex].quantidade);
     fflush(stdin);
     
     printf("Digite o valor do remdio: ");
-    scanf("%f", &r->valor);
+    scanf("%f", &PtrRemedio[*PtrIndex].valor);
     fflush(stdin);
     
     printf("Digite o fabricante do remdio: ");
-    scanf("%[^\n]", &r->fabricante);
+    scanf("%[^\n]", PtrRemedio[*PtrIndex].fabricante);
     fflush(stdin);
+
+    (*PtrIndex)++;
 }
-// Função para alterar campos
-// void alterarCampo (){
-//     printf("Selecione o campo que você deseja alterar: \n");
-//     printf("1. Nome\n");
-//     printf("2. Descricao");
-//     printf("3. Quantidade");
-//     printf("4. Valor");
-//     printf("5. Fabricante");
-// }
 
 // Função para exibir as informações
-void exibirProduto(Remedio r) {
-    printf("\nID: %d\n", r.id);
-    printf("Nome: %s\n", r.nome);
-    printf("Descrição: %s\n", r.descricao);
-    printf("Quantidade: %d\n", r.quantidade);
-    printf("Valor: R$ %.2f\n", r.valor);
+void exibirProduto(Remedio *PtrRemedio, int *PtrIndex) {
+    for(int i = 0; i < *PtrIndex; i++){
+        printf("\nID: %d\n", PtrRemedio[i].id);
+        printf("Nome: %s\n", PtrRemedio[i].nome);
+        printf("Descricao: %s\n", PtrRemedio[i].descricao);
+        printf("Quantidade: %d\n", PtrRemedio[i].quantidade);
+        printf("Valor: R$ %.2f\n", PtrRemedio[i].valor);
+        printf("Fabricante: %.s\n", PtrRemedio[i].fabricante);
+    }
 }
+
+// Função para alterar informações
+void alterarCampo (){
+    int id1;
+    printf("Selecione o ID que voce deseja alterar: \n");
+    scanf("%d", &id1);
+    
+    printf("Digite o nome do remedio(Novo): ");
+    scanf(" %[^\n]", PtrRemedio[id1].nome);
+    fflush(stdin);
+    
+    printf("Digite a descricao do remedio(Novo): ");
+    scanf(" %[^\n]", PtrRemedio[id1].descricao);
+    fflush(stdin);
+    
+    printf("Digite a quantidade do remdio(Novo): ");
+    scanf("%d", &PtrRemedio[id1].quantidade);
+    fflush(stdin);
+    
+    printf("Digite o valor do remdio(Novo): ");
+    scanf("%f", &PtrRemedio[id1].valor);
+    fflush(stdin);
+    
+    printf("Digite o fabricante do remdio(Novo): ");
+    scanf("%[^\n]", PtrRemedio[id1].fabricante);
+    fflush(stdin);
+}
+
+
 
 int main() {
 
-    Remedio remedio;
+    
     int opcao;
 
-    while (opcao == NULL) {
-        printf("\n--- Sistema de Gerenciamento de Loja de Esportes ---\n");
+    while (1) {
+        printf("\n--- Sistema de Gerenciamento de Farmacia ---\n");
         printf("Escolha uma opcao:\n");
         printf("1. Cadastrar produto\n");
         printf("2. Exibir produto\n");
         printf("3. Alterar campo\n");
+        printf("7. Sair\n");
         scanf("%d", &opcao);
 
         switch (opcao) {
             case 1:
-                cadastrarProduto(&remedio);
+                cadastrarProduto(remedios, &indice);
                 break;
             case 2:
-                exibirProduto(remedio);
+                exibirProduto(remedios, &indice);
                 break;
             case 3:
-                alterarCampo(remedio);
+                alterarCampo(remedios);
                 break;
+            case 7:
+                // printf("Saindo do sistema...\n");
+                return 0;
             default:
-                printf("Opção inválida. Tente novamente.\n");
+                printf("Opcao invalida. Tente novamente.\n");
+                
         }
     }
 
