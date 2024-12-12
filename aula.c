@@ -12,14 +12,13 @@ typedef struct {
 
 }Remedio;
 
-
 int indice = 0;
 int *PtrIndex = &indice;
 Remedio remedios[10];
 Remedio *PtrRemedio = remedios;
 
 
-// Função para cadastrar um novo remedio
+// Função para adicionar um novo remedio
 void cadastrarProduto(Remedio *PtrRemedio, int *PtrIndex) {
     
     printf("\nDigite um ID para o remedio: ");
@@ -34,31 +33,19 @@ void cadastrarProduto(Remedio *PtrRemedio, int *PtrIndex) {
     scanf(" %[^\n]", PtrRemedio[*PtrIndex].descricao);
     fflush(stdin);
     
-    printf("Digite a quantidade do remdio: ");
+    printf("Digite a quantidade do remedio: ");
     scanf("%d", &PtrRemedio[*PtrIndex].quantidade);
     fflush(stdin);
     
-    printf("Digite o valor do remdio: ");
+    printf("Digite o valor do remedio: ");
     scanf("%f", &PtrRemedio[*PtrIndex].valor);
     fflush(stdin);
     
-    printf("Digite o fabricante do remdio: ");
+    printf("Digite o fabricante do remedio: ");
     scanf("%[^\n]", PtrRemedio[*PtrIndex].fabricante);
     fflush(stdin);
 
     (*PtrIndex)++;
-}
-
-// Função para exibir as informações
-void exibirProduto(Remedio *PtrRemedio, int *PtrIndex) {
-    for(int i = 0; i < *PtrIndex; i++){
-        printf("\nID: %d\n", PtrRemedio[i].id);
-        printf("Nome: %s\n", PtrRemedio[i].nome);
-        printf("Descricao: %s\n", PtrRemedio[i].descricao);
-        printf("Quantidade: %d\n", PtrRemedio[i].quantidade);
-        printf("Valor: R$ %.2f\n", PtrRemedio[i].valor);
-        printf("Fabricante: %.s\n", PtrRemedio[i].fabricante);
-    }
 }
 
 // Função para alterar informações
@@ -75,23 +62,33 @@ void alterarCampo (){
     scanf(" %[^\n]", PtrRemedio[id1].descricao);
     fflush(stdin);
     
-    printf("Digite a quantidade do remdio(Novo): ");
+    printf("Digite a quantidade do remedio(Novo): ");
     scanf("%d", &PtrRemedio[id1].quantidade);
     fflush(stdin);
     
-    printf("Digite o valor do remdio(Novo): ");
+    printf("Digite o valor do remedio(Novo): ");
     scanf("%f", &PtrRemedio[id1].valor);
     fflush(stdin);
     
-    printf("Digite o fabricante do remdio(Novo): ");
+    printf("Digite o fabricante do remedio(Novo): ");
     scanf("%[^\n]", PtrRemedio[id1].fabricante);
     fflush(stdin);
 }
 
+// Função para exibir as informações
+void exibirProduto(Remedio *PtrRemedio, int *PtrIndex) {
+    for(int i = 0; i < *PtrIndex; i++){
+        printf("\nID: %d\n", PtrRemedio[i].id);
+        printf("Nome: %s\n", PtrRemedio[i].nome);
+        printf("Descricao: %s\n", PtrRemedio[i].descricao);
+        printf("Quantidade: %d\n", PtrRemedio[i].quantidade);
+        printf("Valor: R$ %.2f\n", PtrRemedio[i].valor);
+        printf("Fabricante: %.s\n", PtrRemedio[i].fabricante);
+    }
+}
 
 
 int main() {
-
     
     int opcao;
 
