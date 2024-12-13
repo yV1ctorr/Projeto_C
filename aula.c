@@ -19,15 +19,11 @@ Remedio *PtrRemedio = remedios;
 
 
 // Função para adicionar um novo remedio
-void cadastrarProduto(Remedio *PtrRemedio, int *PtrIndex) {
-    
-    printf("\nDigite um ID para o remedio: ");
-    scanf("%d", &PtrRemedio[*PtrIndex].id);
-    fflush(stdin);  //para limpar o buffer depois de cada scanf e evitar alguns erros de leitura
+void cadastrarProduto(Remedio *PtrRemedio, int *PtrIndex) { 
     
     printf("Digite o nome do remedio: ");
     scanf(" %[^\n]", PtrRemedio[*PtrIndex].nome);
-    fflush(stdin);
+    fflush(stdin); //para limpar o buffer depois de cada scanf e evitar alguns erros de leitura
     
     printf("Digite a descricao do remedio: ");
     scanf(" %[^\n]", PtrRemedio[*PtrIndex].descricao);
@@ -46,6 +42,9 @@ void cadastrarProduto(Remedio *PtrRemedio, int *PtrIndex) {
     fflush(stdin);
 
     (*PtrIndex)++;
+    (PtrRemedio[*PtrIndex].id)++;
+
+    printf("Produto cadastrado com sucesso!");
 }
 
 // Função para alterar informações
@@ -73,6 +72,8 @@ void alterarCampo (){
     printf("Digite o fabricante do remedio(Novo): ");
     scanf(" %[^\n]", PtrRemedio[id].fabricante);
     fflush(stdin);
+
+    printf("Produto foi alterado");
 }
 
 // Função para exibir as informações
@@ -87,17 +88,30 @@ void exibirProduto(Remedio *PtrRemedio, int *PtrIndex) {
     }
 }
 
+//Função para excluir elementos cadastrados
+// void excluirProduto(){
+//     int id;
+//     printf("Selecione o ID que voce deseja excluir: \n");
+//     scanf("%d", &id);
+    
+//     remove(PtrRemedio[id].id);
+
+
+//     printf("Produto excluido!");
+// };
+
 
 int main() {
     
     int opcao;
 
     while (1) {
-        printf("\n--- Sistema de Gerenciamento de Farmacia ---\n");
+        printf("\n--- SISTEMA DE GERENCIAMENTO DE FARMACIA ---\n");
         printf("Escolha uma opcao:\n");
-        printf("1. Cadastrar produto\n");
-        printf("2. Exibir produto\n");
-        printf("3. Alterar campo\n");
+        printf("1. Cadastrar novo produto\n");
+        printf("2. Exibir produtos\n");
+        printf("3. Alterar produto\n");
+        printf("4. Excluir produto\n");
         printf("7. Sair\n");
         scanf("%d", &opcao);
 
@@ -111,6 +125,9 @@ int main() {
             case 3:
                 alterarCampo(*PtrRemedio, *PtrIndex);
                 break;
+            // case 4:
+            //     excluirProduto(*PtrRemedio, *PtrIndex);
+            //     break;
             case 7:
                 printf("Saindo do sistema...\n");
                 return 0;
