@@ -23,7 +23,7 @@ void cadastrarProduto(Remedio *PtrRemedio, int *PtrIndex) {
     
     printf("\nDigite um ID para o remedio: ");
     scanf("%d", &PtrRemedio[*PtrIndex].id);
-    fflush(stdin);
+    fflush(stdin);  //para limpar o buffer depois de cada scanf e evitar alguns erros de leitura
     
     printf("Digite o nome do remedio: ");
     scanf(" %[^\n]", PtrRemedio[*PtrIndex].nome);
@@ -42,7 +42,7 @@ void cadastrarProduto(Remedio *PtrRemedio, int *PtrIndex) {
     fflush(stdin);
     
     printf("Digite o fabricante do remedio: ");
-    scanf("%[^\n]", PtrRemedio[*PtrIndex].fabricante);
+    scanf(" %[^\n]", PtrRemedio[*PtrIndex].fabricante);
     fflush(stdin);
 
     (*PtrIndex)++;
@@ -50,28 +50,28 @@ void cadastrarProduto(Remedio *PtrRemedio, int *PtrIndex) {
 
 // Função para alterar informações
 void alterarCampo (){
-    int id1;
+    int id;
     printf("Selecione o ID que voce deseja alterar: \n");
-    scanf("%d", &id1);
+    scanf("%d", &id);
     
     printf("Digite o nome do remedio(Novo): ");
-    scanf(" %[^\n]", PtrRemedio[id1].nome);
+    scanf(" %[^\n]", PtrRemedio[id].nome);
     fflush(stdin);
     
     printf("Digite a descricao do remedio(Novo): ");
-    scanf(" %[^\n]", PtrRemedio[id1].descricao);
+    scanf(" %[^\n]", PtrRemedio[id].descricao);
     fflush(stdin);
     
     printf("Digite a quantidade do remedio(Novo): ");
-    scanf("%d", &PtrRemedio[id1].quantidade);
+    scanf("%d", &PtrRemedio[id].quantidade);
     fflush(stdin);
     
     printf("Digite o valor do remedio(Novo): ");
-    scanf("%f", &PtrRemedio[id1].valor);
+    scanf("%f", &PtrRemedio[id].valor);
     fflush(stdin);
     
     printf("Digite o fabricante do remedio(Novo): ");
-    scanf("%[^\n]", PtrRemedio[id1].fabricante);
+    scanf(" %[^\n]", PtrRemedio[id].fabricante);
     fflush(stdin);
 }
 
@@ -83,7 +83,7 @@ void exibirProduto(Remedio *PtrRemedio, int *PtrIndex) {
         printf("Descricao: %s\n", PtrRemedio[i].descricao);
         printf("Quantidade: %d\n", PtrRemedio[i].quantidade);
         printf("Valor: R$ %.2f\n", PtrRemedio[i].valor);
-        printf("Fabricante: %.s\n", PtrRemedio[i].fabricante);
+        printf("Fabricante: %s\n", PtrRemedio[i].fabricante);
     }
 }
 
@@ -109,10 +109,10 @@ int main() {
                 exibirProduto(remedios, &indice);
                 break;
             case 3:
-                alterarCampo(remedios);
+                alterarCampo(*PtrRemedio, *PtrIndex);
                 break;
             case 7:
-                // printf("Saindo do sistema...\n");
+                printf("Saindo do sistema...\n");
                 return 0;
             default:
                 printf("Opcao invalida. Tente novamente.\n");
