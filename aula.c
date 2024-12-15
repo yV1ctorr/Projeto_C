@@ -9,13 +9,16 @@ typedef struct {
     char descricao[50];
     char fabricante[20];
     float valor;
-
+    
 }Remedio;
 
 int indice = 0;
 int *PtrIndex = &indice;
 Remedio remedios[10];
 Remedio *PtrRemedio = remedios;
+
+// função para verificar senha
+void verificarSenha(){}
 
 
 // Função para adicionar um novo remedio
@@ -98,42 +101,50 @@ void exibirProduto(Remedio *PtrRemedio, int *PtrIndex) {
 
 
 //     printf("Produto excluido!");
-// };
+//     (PtrRemedio[*PtrIndex].id)++;
+// }
 
 
 int main() {
     
     int opcao;
+    char senha[10]= "abcd";
+    char senhaInserida[10];
 
-    while (1) {
-        printf("\n--- SISTEMA DE GERENCIAMENTO DE FARMACIA ---\n");
-        printf("Escolha uma opcao:\n");
-        printf("1. Cadastrar novo produto\n");
-        printf("2. Exibir produtos\n");
-        printf("3. Alterar produto\n");
-        printf("4. Excluir produto\n");
-        printf("7. Sair\n");
-        scanf("%d", &opcao);
+    printf("Digite sua senha: \n");
+    scanf("%s", senhaInserida);
 
-        switch (opcao) {
-            case 1:
-                cadastrarProduto(remedios, &indice);
-                break;
-            case 2:
-                exibirProduto(remedios, &indice);
-                break;
-            case 3:
-                alterarCampo(*PtrRemedio, *PtrIndex);
-                break;
-            // case 4:
-            //     excluirProduto(*PtrRemedio, *PtrIndex);
-            //     break;
-            case 7:
-                printf("Saindo do sistema...\n");
-                return 0;
-            default:
-                printf("Opcao invalida. Tente novamente.\n");
-                
+    if (strcmp(senhaInserida, senha) == 0) {
+        while (1) {
+            printf("\n--- SISTEMA DE GERENCIAMENTO DE FARMACIA ---\n");
+            printf("Escolha uma opcao:\n");
+            printf("1. Cadastrar novo produto\n");
+            printf("2. Exibir produtos\n");
+            printf("3. Alterar produto\n");
+            printf("4. Excluir produto\n");
+            printf("7. Sair\n");
+            scanf("%d", &opcao);
+
+            switch (opcao) {
+                case 1:
+                    cadastrarProduto(remedios, &indice);
+                    break;
+                case 2:
+                    exibirProduto(remedios, &indice);
+                    break;
+                case 3:
+                    alterarCampo(*PtrRemedio, *PtrIndex);
+                    break;
+                // case 4:
+                //     excluirProduto(*PtrRemedio, *PtrIndex);
+                //     break;
+                case 7:
+                    printf("Saindo do sistema...\n");
+                    return 0;
+                default:
+                    printf("Opcao invalida. Tente novamente.\n");
+                    
+            }
         }
     }
 
