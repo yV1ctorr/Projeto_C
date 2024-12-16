@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-// Definindo a estrutura
+// Definindo estrutura
 typedef struct {
     int id;
     int quantidade;
@@ -16,10 +16,6 @@ int indice = 0;
 int *PtrIndex = &indice;
 Remedio remedios[10];
 Remedio *PtrRemedio = remedios;
-
-// função para verificar senha
-void verificarSenha(){}
-
 
 // Função para adicionar um novo remedio
 void cadastrarProduto(Remedio *PtrRemedio, int *PtrIndex) { 
@@ -91,6 +87,28 @@ void exibirProduto(Remedio *PtrRemedio, int *PtrIndex) {
     }
 }
 
+// função para verificar senha
+int senha = 123;
+int senhaInserida;
+int senhaCorreta;
+int *PtrSenha = &senha;
+int *PtrSenhaInserida = &senhaInserida;
+
+void verificarSenha(int PtrSenha, int PtrSenhaInserida) {
+    do{
+        printf("Digite sua senha: \n");
+        scanf("%d", &PtrSenhaInserida);
+        fflush(stdin);
+
+        if ((PtrSenhaInserida == PtrSenha)){
+            senhaCorreta = 1;
+        } else{
+            senhaCorreta = 0;
+        }
+    } while(senhaCorreta < 1);
+}
+
+
 //Função para excluir elementos cadastrados
 // void excluirProduto(){
 //     int id;
@@ -106,45 +124,39 @@ void exibirProduto(Remedio *PtrRemedio, int *PtrIndex) {
 
 
 int main() {
-    
+    verificarSenha(senha, senhaInserida);
+
     int opcao;
-    char senha[10]= "abcd";
-    char senhaInserida[10];
+    while (senhaCorreta > 0){
+        printf("\n--- SISTEMA DE GERENCIAMENTO DE FARMACIA ---\n");
+        printf("Escolha uma opcao:\n");
+        printf("1. Cadastrar novo produto\n");
+        printf("2. Exibir produtos\n");
+        printf("3. Alterar produto\n");
+        printf("4. Excluir produto\n");
+        printf("5. Busca por id\n");
+        printf("7. Sair\n");
+        scanf("%d", &opcao);
 
-    printf("Digite sua senha: \n");
-    scanf("%s", senhaInserida);
-
-    if (strcmp(senhaInserida, senha) == 0) {
-        while (1) {
-            printf("\n--- SISTEMA DE GERENCIAMENTO DE FARMACIA ---\n");
-            printf("Escolha uma opcao:\n");
-            printf("1. Cadastrar novo produto\n");
-            printf("2. Exibir produtos\n");
-            printf("3. Alterar produto\n");
-            printf("4. Excluir produto\n");
-            printf("7. Sair\n");
-            scanf("%d", &opcao);
-
-            switch (opcao) {
-                case 1:
-                    cadastrarProduto(remedios, &indice);
-                    break;
-                case 2:
-                    exibirProduto(remedios, &indice);
-                    break;
-                case 3:
-                    alterarCampo(*PtrRemedio, *PtrIndex);
-                    break;
-                // case 4:
-                //     excluirProduto(*PtrRemedio, *PtrIndex);
-                //     break;
-                case 7:
-                    printf("Saindo do sistema...\n");
-                    return 0;
-                default:
-                    printf("Opcao invalida. Tente novamente.\n");
-                    
-            }
+        switch (opcao) {
+            case 1:
+                cadastrarProduto(remedios, &indice);
+                break;
+            case 2:
+                exibirProduto(remedios, &indice);
+                break;
+            case 3:
+                alterarCampo(*PtrRemedio, *PtrIndex);
+                break;
+            // case 4:
+            //     excluirProduto(*PtrRemedio, *PtrIndex);
+            //     break;
+            case 7:
+                printf("Saindo do sistema...\n");
+                return 0;
+            default:
+                printf("Opcao invalida. Tente novamente.\n");
+                
         }
     }
 
